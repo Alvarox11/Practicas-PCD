@@ -1,0 +1,65 @@
+ReentrandReadWriteLock Recurso = new ReentranReadWriteLock(); [true,false]
+
+(NO CONFUNDIR CON PRIORIDAD LECTURA ESCRITURA)
+
+    fair (true en constructor)
+
+    unfair -> como hay un lector dejaria entrar otro lector (false)
+
+    (si no le pasamos true, el modo por defecto seria false, unfair)
+
+
+    - Lock / unlock para bloquear el recurso (readlock, writelock ... )
+
+    - el recurso se lo paso a todos los hilos
+
+    - NUNCA debo poner synchronized haciendo esto
+
+
+    cualquier codigo entre ...
+
+
+
+    public void leer:
+
+    Recurso.readLock.lock() // Todo entre estos bloque se ejecuta en Exclusion mutua
+        Random rnd = new Random();
+
+        try{
+            //leer....
+            
+            if(rnd.nextInt(4)==1{ //el 25 % de las veces....
+                
+                Recurso.ReadLock.unlock();
+                Recurso.WriteLock.lock();
+
+                    //escribir
+                
+                Recurso.ReadLock.lock();
+                Recurso.WriteLock.unlock();
+
+
+                    //leer...
+
+            }
+
+        }finally{
+    
+        Recurso.readLock.unlock()
+    }
+            
+
+
+
+    public void escritbir
+
+    Recurso.writeLock.lock()
+        try{
+
+        }finally{
+    
+        Recurso.writeLock.unlock()
+    }
+
+
+    
